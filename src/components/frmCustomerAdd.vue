@@ -1,41 +1,40 @@
 <template>
   <div>
     <b-modal
-      id="modal-prevent-closing"
+      id="modal-prevent-closing1"
       hide-footer
       ref="my-modal"
-      title="Update Form"
+      title="Add Form"
     >
       <form ref="form">
         Name:
         <b-form-input
           title="name"
           id="name-input"
-          :value="user.name"
+          v-model="userEdit.name"
         ></b-form-input>
         Age:
         <b-form-input
           title="age"
           type="number"
           id="age-input"
-          :value="user.age"
+          v-model="userEdit.age"
         ></b-form-input>
         Address:
         <b-form-input
           title="address"
           id="address-input"
-          :value="user.address"
+          v-model="userEdit.address"
         ></b-form-input>
         Phone:
         <b-form-input
           title="phone"
           id="phone-input"
           type="number"
-          :value="user.phone"
+          v-model="userEdit.phone"
         ></b-form-input>
+      <b-button class="mt-3" variant="outline-danger" block v-on:click="Add">Add</b-button>
       </form>
-      <b-button class="mt-3" variant="outline-danger" block v-on:click="Update">Update</b-button>
-      <b-button class="mt-3" variant="outline-danger" block v-on:click="Delete">Delete</b-button>
     </b-modal>
   </div>
 </template>
@@ -44,7 +43,7 @@ export default {
   data () {
     return {
       userEdit: {
-        id: null,
+        id: this.usersAdd.length,
         name: '',
         age: null,
         address: '',
@@ -59,16 +58,19 @@ export default {
       ]
     }
   },
-  props: ['user', 'usersUpdate'],
+  props: ['usersAdd'],
   created: function () {
   },
   methods: {
-    Update () {
-      this.user.$set(this.usersUpdate, this.usersUpdate.indexOf(this.user), this.userEdit)
-      this.$refs['my-modal'].hide()
-    },
-    Delete () {
-      this.usersUpdate.splice(this.usersUpdate.indexOf(this.user), 1)
+    Add () {
+      var newCustomer = {
+        id: this.userEdit.id + 1,
+        name: this.userEdit.name,
+        age: this.userEdit.age,
+        address: this.userEdit.address,
+        phone: this.userEdit.phone
+      }
+      this.usersAdd.push(newCustomer)
       this.$refs['my-modal'].hide()
     }
   }

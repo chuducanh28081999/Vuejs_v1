@@ -2,7 +2,6 @@
     <div>
         <b-navbar toggleable="lg" type="dark" variant="info">
             <b-navbar-brand>Vuejs</b-navbar-brand>
-
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
             <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
@@ -15,9 +14,9 @@
                 </template>
             </b-navbar-nav>
             <b-button-group >
+                <b-button variant="info" v-on:click="navigate('main')">Home</b-button>
                 <b-dropdown variant="info" right text="Khách hàng">
                 <b-dropdown-item v-on:click="navigate('listCustomer')">Danh sách khách hàng</b-dropdown-item>
-                <b-dropdown-item v-on:click="navigate('addCustomer')">Thêm khách hàng</b-dropdown-item>
                 <b-dropdown-divider></b-dropdown-divider>
                 </b-dropdown>
                 <b-dropdown variant="info" right text="Mua bán">
@@ -42,19 +41,17 @@
     </div>
 </template>
 <script>
-import router from '../router/index'
 export default {
-  name: 'nav',
   components: {
   },
   methods: {
     navigate (route) {
       if (route === 'listCustomer') {
-        router.push({ name: 'Customers' })
-      } else if (route === 'addCustomer') {
-        route.push({ name: 'Add' })
+        this.$router.push('/customers').catch(() => {})
+      } else if (route === 'main') {
+        this.$router.push('/').catch(() => {})
       } else if (route === 'history') {
-        route.push({ name: 'History' })
+        this.$router.push('/history').catch(() => {})
       }
     }
   },

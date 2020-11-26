@@ -2,28 +2,28 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Customers from '../views/Customers.vue'
-import Login from '../views/Login.vue'
+import History from '../views/History.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/home',
-    name: 'Home',
+    path: '/',
+    name: 'home',
     component: Home
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
+    path: '/customers',
+    name: 'customers',
+    component: Customers
   },
   {
-    path: '/customers',
-    name: 'Customers',
-    component: Customers
+    path: '/history',
+    name: 'history',
+    component: History
   }
-]
 
+]
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
